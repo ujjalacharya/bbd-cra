@@ -11,7 +11,6 @@ class Login extends Component {
     e.preventDefault();
     if(this.state.email === "admin@bbdnepal.com" || this.state.password === "bbdnepal12345"){
      this.props.changeAuthState("true");
-     window.location.reload();
     }
     else{
      alert("Incorrect Email or password");
@@ -22,7 +21,6 @@ class Login extends Component {
  handleChange = (e) =>{
   this.setState({[e.target.name]: e.target.value})
  }
-
 
   render() {
    console.log(this.state);
