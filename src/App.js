@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import MessageTable from './Components/MessageTable';
 import './App.css';
-import Home from './Components/Home';
+import {BrowserRouter} from 'react-router-dom';
+import MainRouter from './MainRouter';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <Home />
+      <div>
+        <BrowserRouter>
+          <MainRouter />
+        </BrowserRouter>
       </div>
     );
   }
