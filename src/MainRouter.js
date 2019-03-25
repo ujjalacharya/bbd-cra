@@ -5,17 +5,15 @@ import Home from "./Components/Home";
 import Contact from "./Components/Contact";
 import Application from "./Components/Application";
 
-const MainRouter = () => {
+const MainRouter = (props) => {
   return (
-    <>
-      <Layout>
+      <Layout {...props}>
         <Switch>
-          <Route exact path="/" component={Home} />
+          <Route exact path="/" component={Home}/>
           <Route exact path="/contact" component={Contact} />
           <Route exact path="/application" component={Application} />
         </Switch>
       </Layout>
-    </>
   );
 };
 

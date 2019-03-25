@@ -4,7 +4,7 @@ export default class Application extends Component {
   render() {
     return (
       <>
-       <table id="example" class="table table-striped table-bordered" style={{width: "100%"}}>
+       <table id="example" className="table table-striped table-bordered" style={{width: "100%"}}>
         <thead>
             <tr>
                 <th>Names</th>

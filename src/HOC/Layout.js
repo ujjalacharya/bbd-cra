@@ -39,6 +39,12 @@ class Layout extends Component {
                 </li>
             </ul>
           </ul>
+          <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+                    <Link className="nav-link" onClick={()=> this.props.changeAuthState("false")} to="/">Logout</Link>
+                </li>
+                
+            </ul>
         </div>
       </nav>
       <div className="container">
