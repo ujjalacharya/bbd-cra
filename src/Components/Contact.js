@@ -3,10 +3,22 @@ import React, { Component } from "react";
 import { firebaseLooper } from "../helpers";
 
 import firebase from "firebase/app";
+
+const initialTableTitle = [
+  "S.N",
+  "Email",
+  "First Name",
+  "Last Name",
+  "Phone Number",
+  "Subject",
+  "Message",
+  "Action"
+];
 export default class Application extends Component {
   state = {
     data: [],
-    loading: true
+    loading: true,
+    initialTableTitle: initialTableTitle
   };
 
   componentDidMount() {
@@ -24,92 +36,45 @@ export default class Application extends Component {
     console.log(id);
   };
 
+  handleDelete = (id) => {
+    firebase.database().ref('contacts').child(id).remove();
+    window.location.reload()
+  }
+
   render() {
     console.log(this.state);
     return (
       <div className="row list-view">
         <table className="table table-hover table-striped " id="data-table">
           <thead>
-            <tr className="tbl-title">
-              <th scope="col" onClick={() => this.onSort("id")}>
-                S.N.
-                <i
-                  id="id-arrow-up"
-                  className="ion-android-arrow-up"
-                  style={{ display: "none" }}
-                />
-                <i id="id-arrow-down" className="ion-android-arrow-down" />
-              </th>
-              <th scope="col" onClick={() => this.onSort("title")}>
-                Email
-                <i
-                  id="title-arrow-up"
-                  className="ion-android-arrow-up"
-                  style={{ display: "none" }}
-                />
-                <i id="title-arrow-down" className="ion-android-arrow-down" />
-              </th>
-              <th scope="col" onClick={() => this.onSort("address")}>
-                First Name
-                <i
-                  id="address-arrow-up"
-                  className="ion-android-arrow-up"
-                  style={{ display: "none" }}
-                />
-                <i id="address-arrow-down" className="ion-android-arrow-down" />
-              </th>
-              <th scope="col" onClick={() => this.onSort("price")}>
-                Last Name
-                <i
-                  id="price-arrow-up"
-                  className="ion-android-arrow-up"
-                  style={{ display: "none" }}
-                />
-                <i id="price-arrow-down" className="ion-android-arrow-down" />
-              </th>
-              <th scope="col" onClick={() => this.onSort("status")}>
-                Phone
-                <i
-                  id="status-arrow-up"
-                  className="ion-android-arrow-up"
-                  style={{ display: "none" }}
-                />
-                <i id="status-arrow-down" className="ion-android-arrow-down" />
-              </th>
-              <th scope="col" onClick={() => this.onSort("category")}>
-                Subject
-                <i
-                  id="category-arrow-up"
-                  className="ion-android-arrow-up"
-                  style={{ display: "none" }}
-                />
-                <i
-                  id="category-arrow-down"
-                  className="ion-android-arrow-down"
-                />
-              </th>
-              <th scope="col" onClick={() => this.onSort("type")}>
-                Message
-                <i
-                  id="type-arrow-up"
-                  className="ion-android-arrow-up"
-                  style={{ display: "none" }}
-                />
-                <i id="type-arrow-down" className="ion-android-arrow-down" />
-              </th>
+            <tr>
+              {this.state.initialTableTitle.map((title, i) => (
+                <th key={i} scope="col" onClick={() => this.onSort("id")}>
+                  {title}
+                  <i
+                    id="id-arrow-up"
+                    className="ion-android-arrow-up"
+                    style={{ display: "none" }}
+                  />
+                  <i id="id-arrow-down" className="ion-android-arrow-down" />
+                </th>
+              ))}
             </tr>
           </thead>
           <tbody>
-            {this.state.data.map((property, i) => {
+            {this.state.data.map((contact, i) => {
               return (
-                <tr key={property.id}>
+                <tr key={contact.id}>
                   <th scope="row">{i + 1}</th>
-                  <td>{property.email}</td>
-                  <td>{property.firstname}</td>
-                  <td>{property.lastname}</td>
-                  <td>{property.phone}</td>
-                  <td>{property.subject}</td>
-                  <td>{property.message}</td>
+                  <td>{contact.email}</td>
+                  <td>{contact.firstname}</td>
+                  <td>{contact.lastname}</td>
+                  <td>{contact.phone}</td>
+                  <td>{contact.subject}</td>
+                  <td>{contact.message}</td>
+                  <td>
+                    <button className="btn btn-danger" onClick={()=> this.handleDelete(contact.id)}>Delete</button>                      
+                  </td>
                 </tr>
               );
             })}
@@ -117,10 +82,7 @@ export default class Application extends Component {
         </table>
         {this.state.loading && (
           <div className="loading-image">
-            <img
-              src="/img/loading.gif"
-              alt=""
-            />
+            <img src="/img/loading.gif" alt="" />
           </div>
         )}
       </div>
