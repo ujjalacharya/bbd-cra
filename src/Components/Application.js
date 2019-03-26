@@ -46,12 +46,6 @@ export default class Application extends Component {
               {this.state.initialTableTitle.map((title, i) => (
                    <th key={i} scope="col" onClick={() => this.onSort("id")}>
                    {title}
-                   <i
-                     id="id-arrow-up"
-                     className="ion-android-arrow-up"
-                     style={{ display: "none" }}
-                   />
-                   <i id="id-arrow-down" className="ion-android-arrow-down" />
                  </th>
                   ))}
             </tr>
