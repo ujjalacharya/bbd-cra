@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { firebaseLooper } from "../helpers";
 
 import firebase from "firebase/app";
-export default class Contact extends Component {
+export default class Application extends Component {
   state = {
     data: [],
     loading: true
@@ -13,7 +13,7 @@ export default class Contact extends Component {
     setTimeout(() => {
       firebase
         .database()
-        .ref("apply")
+        .ref("contacts")
         .once("value", data => {
           this.setState({ data: firebaseLooper(data), loading: false });
         });
@@ -41,7 +41,7 @@ export default class Contact extends Component {
                 <i id="id-arrow-down" className="ion-android-arrow-down" />
               </th>
               <th scope="col" onClick={() => this.onSort("title")}>
-                Name
+                Email
                 <i
                   id="title-arrow-up"
                   className="ion-android-arrow-up"
@@ -50,7 +50,7 @@ export default class Contact extends Component {
                 <i id="title-arrow-down" className="ion-android-arrow-down" />
               </th>
               <th scope="col" onClick={() => this.onSort("address")}>
-                Email
+                First Name
                 <i
                   id="address-arrow-up"
                   className="ion-android-arrow-up"
@@ -59,7 +59,7 @@ export default class Contact extends Component {
                 <i id="address-arrow-down" className="ion-android-arrow-down" />
               </th>
               <th scope="col" onClick={() => this.onSort("price")}>
-                Occupation
+                Last Name
                 <i
                   id="price-arrow-up"
                   className="ion-android-arrow-up"
@@ -68,7 +68,7 @@ export default class Contact extends Component {
                 <i id="price-arrow-down" className="ion-android-arrow-down" />
               </th>
               <th scope="col" onClick={() => this.onSort("status")}>
-                Gender
+                Phone
                 <i
                   id="status-arrow-up"
                   className="ion-android-arrow-up"
@@ -76,23 +76,26 @@ export default class Contact extends Component {
                 />
                 <i id="status-arrow-down" className="ion-android-arrow-down" />
               </th>
-              <th scope="col" onClick={() => this.onSort("status")}>
-                Mobile
+              <th scope="col" onClick={() => this.onSort("category")}>
+                Subject
                 <i
-                  id="status-arrow-up"
+                  id="category-arrow-up"
                   className="ion-android-arrow-up"
                   style={{ display: "none" }}
                 />
-                <i id="status-arrow-down" className="ion-android-arrow-down" />
+                <i
+                  id="category-arrow-down"
+                  className="ion-android-arrow-down"
+                />
               </th>
-              <th scope="col" onClick={() => this.onSort("status")}>
-                Actions
+              <th scope="col" onClick={() => this.onSort("type")}>
+                Message
                 <i
-                  id="status-arrow-up"
+                  id="type-arrow-up"
                   className="ion-android-arrow-up"
                   style={{ display: "none" }}
                 />
-                <i id="status-arrow-down" className="ion-android-arrow-down" />
+                <i id="type-arrow-down" className="ion-android-arrow-down" />
               </th>
             </tr>
           </thead>
@@ -101,67 +104,12 @@ export default class Contact extends Component {
               return (
                 <tr key={property.id}>
                   <th scope="row">{i + 1}</th>
-                  <td>{property.name}</td>
                   <td>{property.email}</td>
-                  <td>{property.occupation}</td>
-                  <td>{property.gender}</td>
-                  <td>{property.contactmobile}</td>
-                  <td style={{ padding: "1rem" }}>
-                    <button
-                      className="btn btn-info info-btn"
-                      data-toggle="modal"
-                      data-target="#exampleModal"
-                    >
-                      View
-                    </button>
-
-                    <button className="btn btn-danger">Delete</button>
-                  </td>
-
-                  {/* <td>    
-                                    <button className="btn btn-primary">View</button>
-                                    <button className="btn btn-danger">Delete</button>
-                                </td> */}
-
-                  <div
-                    class="modal fade"
-                    id="exampleModal"
-                    tabindex="-1"
-                    role="dialog"
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true"
-                  >
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">
-                            Modal title
-                          </h5>
-                          <button
-                            type="button"
-                            class="close"
-                            data-dismiss="modal"
-                            aria-label="Close"
-                          >
-                            <span aria-hidden="true">&times;</span>
-                          </button>
-                        </div>
-                        <div class="modal-body">...</div>
-                        <div class="modal-footer">
-                          <button
-                            type="button"
-                            class="btn btn-secondary"
-                            data-dismiss="modal"
-                          >
-                            Close
-                          </button>
-                          <button type="button" class="btn btn-primary">
-                            Save changes
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <td>{property.firstname}</td>
+                  <td>{property.lastname}</td>
+                  <td>{property.phone}</td>
+                  <td>{property.subject}</td>
+                  <td>{property.message}</td>
                 </tr>
               );
             })}
@@ -169,7 +117,10 @@ export default class Contact extends Component {
         </table>
         {this.state.loading && (
           <div className="loading-image">
-            <img src="/img/loading.gif" alt="" />
+            <img
+              src="/img/loading.gif"
+              alt=""
+            />
           </div>
         )}
       </div>
