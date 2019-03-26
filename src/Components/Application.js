@@ -30,6 +30,11 @@ export default class Application extends Component {
     console.log(id);
   };
 
+  handleDelete = (id) => {
+    firebase.database().ref('apply').child(id).remove();
+    window.location.reload()
+  }
+
   render() {
     console.log(this.state);
     return (
@@ -70,7 +75,7 @@ export default class Application extends Component {
                       View More
                     </button>
 
-                    <button className="btn btn-danger">Delete</button>
+                    <button className="btn btn-danger" onClick={()=> this.handleDelete(contact.id)}>Delete</button>
                   </td>
                   <InfoModal infoData={contact} id={contact.id}/>
                 </tr>
