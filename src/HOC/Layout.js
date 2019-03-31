@@ -24,9 +24,14 @@ class Layout extends Component {
           <ul className="navbar-nav mr-auto">
             <li className="nav-item active">
               <Link className="nav-link" to="/">
-                Home <span className="sr-only">(current)</span>
+                Home
+                 {/* <span className="sr-only">(current)</span> */}
               </Link>
             </li>
+            <li className="nav-item">
+                    <Link className="nav-link" to="/newsletter">News Letter</Link>
+                </li>
+                
             <ul className="navbar-nav ml-auto">
                 <li className="nav-item dropdown navbar-nav ml-auto">
                     <a className="nav-link dropdown-toggle" href={"/"} id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -39,6 +44,7 @@ class Layout extends Component {
                 </li>
             </ul>
           </ul>
+
           <ul className="navbar-nav ml-auto">
                 <li className="nav-item">
                     <Link className="nav-link" onClick={()=> this.props.changeAuthState("false")} to="/">Logout</Link>
